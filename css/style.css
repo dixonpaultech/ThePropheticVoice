@@ -825,12 +825,12 @@ h3 {
     #mobileFilterToggle {
         display: block;
         width: 100%;
-        padding: 1rem;
+        padding: .5rem;
         font-size: 1.2rem;
-        background-color: var(--green);
-        color: var(--tan);
-        border: none;
+        background-color: var(--dark-tan);
+        color: black;
         transition: all 0.3s var(--ease-premium);
+        border: 1px solid var(--green-shadow-light);
     }
 
     #mobileFilterToggle:hover {
@@ -845,16 +845,21 @@ h3 {
     .navBar {
         flex-direction: column;
         padding: 1rem;
-        gap: 1rem;
+        gap: 0.5rem;
     }
 
     .toggleDiv {
         padding: 0;
+        gap: 1rem;
     }
 
     #doctrineOrInvitation {
         width: auto;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+    }
+
+    #addNew {
+        padding: 0.5rem 3.5rem;
     }
 
     #categories {
