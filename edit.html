@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=home" />
+    <title>THE PROPHETIC VOICE</title>
+</head>
+<body>
+    <div class="navBar">
+        <h1 class="title">THE PROPHETIC VOICE</h1>
+        <div class="toggleDiv">
+            <div id="doctrineOrInvitation">DOCTRINE</div>
+            <input type="checkbox" id="doctrineToggle" class="toggle-checkbox">
+                <label for="doctrineToggle" class="toggle-label">
+                <div class="toggle-knob"></div>
+            </label>
+        </div>
+        <div id="homeButton" class="material-symbols-outlined">home</div>
+        <div id="clearPage">Clear</div>
+    </div>
+
+    
+    <div id="pageContent">        
+        <div id="addPage">
+            <form id="addForm">
+                <div id="addTitleContainer">
+                    <label for="addTitle">Talk Title:</label>
+                    <input id="addTitle" type="text" name="title" required>
+                </div>
+                
+                <div id="addInfo">
+                    <div id="addDateContainer">
+                        <label id="sessionLabel">Conference Session:</label>
+                        <label for="addMonthApril">
+                            <input id="addMonthApril" type="radio" name="month" value="April" required>
+                            April
+                        </label>
+                        <label for="addMonthOctober">
+                            <input id="addMonthOctober" type="radio" name="month" value="October">
+                            October
+                        </label>
+                        <label for="addYear">Year</label>
+                        <select id="addYear" name="year">
+                            <option value="2026">2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
+                            <option value="2010">2010</option>
+                            <option value="2009">2009</option>
+                            <option value="2008">2008</option>
+                            <option value="2007">2007</option>
+                            <option value="2006">2006</option>
+                            <option value="2005">2005</option>
+                            <option value="2004">2004</option>
+                            <option value="2003">2003</option>
+                            <option value="2002">2002</option>
+                            <option value="2001">2001</option>
+                            <option value="2000">2000</option>
+                        </select>
+                    </div>
+                    <div id="addSpeakerContainer">
+                        <label for="addSpeaker">Speaker:</label>
+                        <input type="text" id="addSpeaker" name="speaker">
+                    </div>
+                    <div id="addPositionContainer">
+                        <label for="addPosition">Position:</label>
+                        <select id="addPosition" name="position">
+                            <option value="President">President</option>
+                            <option value="First Presidency">First Presidency</option>
+                            <option value="Apostle">Apostle</option>
+                            <option value="General Officer">General Officer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="addContent"> 
+                    <div id="leftSideContainer">
+                        <details id="godheadContainer">
+                            <summary>GODHEAD</summary>
+                            <label>
+                                <input type="checkbox" value="God The Father">
+                                God The Father
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Jesus Christ">
+                                Jesus Christ
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="The Holy Spirit">
+                                The Holy Spirit
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Unity">
+                                Unity
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Joy">
+                                Joy
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Prayer">
+                                Prayer
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Worship">
+                                Worship
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Heavenly Mother">
+                                Heavenly Mother
+                            </label><br>
+                        </details>
+
+                        <details id="planOfSalvationContainer">
+                            <summary>The Plan Of Salvation</summary>
+                            <label>
+                                <input type="checkbox" value="Plan of Salvation">
+                                Plan of Salvation
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Premortal Life">
+                                Premortal Life
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Agency">
+                                Agency
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="The Creation">
+                                The Creation
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="The Fall">
+                                The Fall
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Opposition">
+                                Opposition
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Mortal Life">
+                                Mortal Life
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Self-Reliance">
+                                Self-Reliance
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Death">
+                                Death
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="The Spirit World">
+                                The Spirit World
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="The Second Coming / Millennium">
+                                The Second Coming / Millennium
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Resurrection">
+                                Resurrection
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Judgment & Degrees of Glory">
+                                Judgment & Degrees of Glory
+                            </label><br>
+                        </details>
+
+                        <details id="atonementContainer">
+                            <summary>The Atonement Of Jesus Christ</summary>
+                            <label>
+                                <input type="checkbox" value="Jesus's Earthly Ministry">
+                                Jesus's Earthly Ministry
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Christ's Atonement">
+                                Christ's Atonement
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="The Gospel">
+                                The Gospel
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Salvation">
+                                Salvation
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Faith in Jesus Christ">
+                                Faith in Jesus Christ
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Repentance">
+                                Repentance
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Justification">
+                                Justification
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Sanctification">
+                                Sanctification
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Forgiveness">
+                                Forgiveness
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Discipleship">
+                                Discipleship
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Spiritual Foundation">
+                                Spiritual Foundation
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Peacemaking">
+                                Peacemaking
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Christlike Attributes">
+                                Christlike Attributes
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Gifts of the Spirit">
+                                Gifts of the Spirit
+                            </label><br>
+                        </details>
+
+                        <details id="restorationContainer">
+                            <summary>Dispensation, Apostasy, & Restoration</summary>
+                            <label>
+                                <input type="checkbox" value="Dispensation">
+                                Dispensation
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Apostasy">
+                                Apostasy
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Restoration">
+                                Restoration
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Gathering Israel">
+                                Gathering Israel
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Christ's Church">
+                                Christ's Church
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Church Callings">
+                                Church Callings
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Church Activity">
+                                Church Activity
+                            </label><br>
+                        </details>
+
+                        <details id="revelationContainer">
+                            <summary>Prophets & Revelation</summary>
+                            <label>
+                                <input type="checkbox" value="Personal Revelation">
+                                Personal Revelation
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Prophetic Authority">
+                                Prophetic Authority
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Scripture Study">
+                                Scripture Study
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Angels">
+                                Angels
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Answering Questions">
+                                Answering Questions
+                            </label><br>
+                        </details>
+
+                        <details id="priesthoodContainer">
+                            <summary>Priesthood & Priestood Keys</summary>
+                            <label>
+                                <input type="checkbox" value="The Aaronic Priesthood">
+                                The Aaronic Priesthood
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="The Melchizedek Priesthood">
+                                The Melchizedek Priesthood
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Church Organization">
+                                Church Organization
+                            </label><br>
+                        </details>
+
+                        <details id="ordinancesContainer">
+                            <summary>Ordinances & Covenants</summary>
+                            <label>
+                                <input type="checkbox" value="Ordinances">
+                                Ordinances
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Baptism">
+                                Baptism
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Receiving the Holy Ghost">
+                                Receiving the Holy Ghost
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="The Sacrament">
+                                The Sacrament
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Endowment">
+                                Endowment
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Temple Sealing">
+                                Temple Sealing
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Covenants">
+                                Covenants
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Baptismal Covenants">
+                                Baptismal Covenants
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Temple Covenants">
+                                Temple Covenants
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="The Covenant Path">
+                                The Covenant Path
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Exaltation">
+                                Exaltation
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Proxy Temple Work">
+                                Proxy Temple Work
+                            </label><br>
+                        </details>
+
+                        <details id="relationshipsContainer">
+                            <summary>Relationships & Identity</summary>
+                            <label>
+                                <input type="checkbox" value="Divine Identity">
+                                Divine Identity
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Marriage Relationships">
+                                Marriage Relationships
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Family Relationships">
+                                Family Relationships
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Parents">
+                                Parents
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Fatherhood">
+                                Fatherhood
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Motherhood">
+                                Motherhood
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Belonging">
+                                Belonging
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Friendships">
+                                Friendships
+                            </label><br>
+                        </details>
+
+                        <details id="commandmentsContainer">
+                            <summary>Commandments</summary>
+                            <label>
+                                <input type="checkbox" value="2 Great Commandments">
+                                2 Great Commandments
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Love God">
+                                Love God
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Love your Neighbor">
+                                Love your Neighbor
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="10 Commandments">
+                                10 Commandments
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="No Idolatry">
+                                No Idolatry
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Name Of The Lord">
+                                Name Of The Lord
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Sabbath Day Holy">
+                                Sabbath Day Holy
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="No Murder">
+                                No Murder
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="No Stealing">
+                                No Stealing
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="No Bearing False Witness">
+                                No Bearing False Witness
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="No Coveting">
+                                No Coveting
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Tithing">
+                                Tithing
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Fasting">
+                                Fasting
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Word of Wisdom">
+                                Word of Wisdom
+                            </label><br>
+                            <label>
+                                <input type="checkbox" value="Law of Chastity">
+                                Law of Chastity
+                            </label>
+                        </details>
+                    </div>
+                    <div id="addQuoteContainer">
+                        <label for="addQuote">Quote:</label>
+                        <textarea id="addQuote" name="quote" rows="8"></textarea>
+                    </div>
+                    <div id="rightSideContainer">
+                        <div id="addLinkContainer">
+                            <label for="addLink">Talk Link:</label>
+                            <input type="url" id="addLink" name="link">
+                        </div>
+                        <div id="addScripturesContainer">
+                            <label for="addScripturesBtn">Scripture References:</label>
+                            <div id="scriptureInputs"></div>
+                            <button type="button" id="addScriptureBtn">
+                            Add Scripture
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="buttonContainer">
+                    <button id="editDelete" type="addSubmit">Delete</button>
+                    <button id="editCancel">Cancel</button>
+                    <button id="editSave" type="addSubmit">Save</button>
+                </div>
+                </form>
+        </div>
+        
+    </div>
+
+    
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/edit.js"></script>
+</html>

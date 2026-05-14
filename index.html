@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>THE PROPHETIC VOICE</title>
+</head>
+<body>
+    <div class="navBar">
+        <h1 class="title">THE PROPHETIC VOICE</h1>
+        <div id="addNew">Add New</div>
+    </div>
+
+    <div id="pageContent">
+        <div id="categories">
+            <div class="category" data-id="0">The Godhead</div>
+            <div class="category" data-id="1">The Plan of Salvation</div>
+            <div class="category" data-id="2">The Atonement of Jesus Christ</div>
+            <div class="category" data-id="3">Dispensation, Apostasy, Restoration</div>
+            <div class="category" data-id="4">Prophets & Revelation</div>
+            <div class="category" data-id="5">The Priesthood</div>
+            <div class="category" data-id="6">Ordinances & Covenants</div>
+            <div class="category" data-id="7">Relationships & Identity</div>
+            <div class="category" data-id="8">God's Commandments</div>
+        </div>
+    </div>
+
+    <div id="logInDiv" class="logInDiv hidden">
+        <form class="logInForm" id="loginForm">
+            <div id="logInError" class="hidden">Log In Failed</div>
+            <div id="logInCancel">cancel</div>
+            <label class="logInEmailLabel" for="email">Email:</label>
+            <input class="logInInput" type="email" id="email" autocomplete="email" required />
+
+            <label class="logInPasswordLabel" for="password">Password:</label>
+            <input
+                class="logInInput"
+                type="password"
+                id="password"
+                autocomplete="current-password"
+                required
+            />
+
+            <button id="logInButton" class="logInSubmit" type="submit">Log In</button>
+        </form>
+    </div>
+    
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/index.js"></script>
+</html>
