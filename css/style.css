@@ -868,6 +868,7 @@ h3 {
     .toggleDiv {
         padding: 0;
         gap: 1rem;
+        width: 100%;
     }
 
     #doctrineOrInvitation {
