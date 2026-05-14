@@ -437,10 +437,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 clearTopics();
                 topic.classList.add("selected");
                 currentTopic = topic.textContent;
-                displayTopic(currentTopic);
                 clearCategories();
                 const category = topic.closest('.categoryContainer').querySelector('.categoryName');
+                categoryId = categories.findIndex(eachCategory => eachCategory == category.textContent);
                 category.classList.add("selected");
+                displayTopic(currentTopic);
                 scrollToTop();
             });
         });
