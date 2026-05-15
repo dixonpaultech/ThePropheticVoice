@@ -458,7 +458,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 displayTopic(currentTopic);
                 clearCategories();
                 const category = topic.closest('.categoryContainer').querySelector('.categoryName');
+                categoryId = categories.findIndex(eachCategory => eachCategory == category.textContent);
                 category.classList.add("selected");
+                displayTopic(currentTopic);
                 scrollToTop();
             });
         });
