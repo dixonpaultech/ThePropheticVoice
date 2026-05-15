@@ -4,7 +4,6 @@ const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 const supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
 let user;
 
-
 // Get the ID from the URL (e.g., target.html?id=category2)
 const params = new URLSearchParams(window.location.search);
 let categoryId = params.get('id') ? (params.get('id') < 9 ? params.get('id') : 0) : 0; // returns "category2"
@@ -69,7 +68,7 @@ class Quote {
         quoteInfo.className = "quoteInfo";
         const quoteDate = document.createElement("div");
         quoteDate.className = "quoteDate";
-        quoteDate.textContent = this.date;
+        quoteDate.textContent = `${this.date[5] == "0" ? "Apr" : "Oct"} ${this.date.slice(0, 4)}`;
         const quoteSpeaker = document.createElement("div");
         quoteSpeaker.className = "quoteSpeaker";
         quoteSpeaker.textContent = this.speaker.trim().split(' ').pop(); 
@@ -175,6 +174,18 @@ class Quote {
     }
 }
 
+const allTopics = {
+    "The Godhead" : ["God the Father", "Jesus Christ", "The Holy Spirit", "Unity", "Joy", "Prayer", "Worship", "Heavenly Mother"],
+    "The Plan Of Salvation" : ["Plan of Salvation", "Premortal Life", "Agency", "The Creation", "The Fall", "Opposition", "Mortal Life", "Self-Reliance", "Death", "The Spirit World", "The Second Coming / Millennium", "Resurrection", "Judgment & Degrees of Glory"],
+    "The Atonement Of Jesus Christ": ["Jesus's Earthly Ministry", "Jesus's Atonement", "The Gospel", "Salvation", "Faith in Jesus Christ", "Repentance", "Justification", "Sanctification", "Forgiveness", "Discipleship", "Spiritual Foundation", "Peacemaking", "Christlike Attributes", "Gifts of the Spirit"],
+    "Dispensation, Apostasy, & Restoration" : ["Dispensation", "Apostasy", "Restoration", "Gathering Israel", "Christ's Church", "Church Callings", "Church Activity"],
+    "Prophets & Revelation" : ["Personal Revelation", "Prophetic Authority", "Scripture Study", "Angels", "Answering Questions"],
+    "Priesthood & Priestood Keys": ["The Aaronic Priesthood", "The Melchizedek Priesthood", "Church Organization"],
+    "Ordinances & Covenants" : ["Ordinances", "Baptism", "Receiving the Holy Ghost", "The Sacrament", "Endowment", "Temple Sealing", "Covenants", "Baptismal Covenants", "Temple Covenants", "The Covenant Path", "Exaltation", "Proxy Temple Work"],
+    "Relationships & Identity" : ["Divine Identity", "Marriage Relationships", "Family Relationships", "Parents", "Fatherhood", "Motherhood", "Belonging", "Friendships"],
+    "Commandments": ["2 Great Commandments", "Love God", "Love your Neighbor", "10 Commandments", "No Idolatry", "Name of the Lord", "Sabbath Day Holy", "No Murder", "No Stealing", "No Bearing False Witness", "No Coveting", "Tithing", "Fasting", "Word of Wisdom", "Law of Chastity"]
+}
+
 const categories = ["The Godhead", "The Plan Of Salvation", "The Atonement Of Jesus Christ", "Dispensation, Apostasy, & Restoration", "Prophets & Revelation", "Priesthood & Priestood Keys", "Ordinances & Covenants", "Relationships & Identity", "Commandments"];
 
 const quotes = {
@@ -208,6 +219,10 @@ function scrollToTop() {
     });
 }
 
+function findKeyWithItem (obj, search) {
+    return Object.keys(obj).find(key => obj[key].includes(search));
+};
+
 function displayCategory() {
     if (0 <= categoryId <= 8) {
         clearCategories();
@@ -216,7 +231,7 @@ function displayCategory() {
         listOfQuotes.innerHTML = "";
         const category = categories[categoryId];
         quotes[category].forEach((quote) => {
-            if (toggleSetting == "D" ? quote.doctrine : !quote.doctrine) {
+            if (toggleSetting == "D" ? !quote.doctrine : quote.doctrine) {
                 listOfQuotes.appendChild(quote.toHTML());
             }
         });
@@ -227,8 +242,9 @@ function displayTopic(topic) {
     listOfQuotes.innerHTML = "";
     const category = categories[categoryId];
     quotes[category].forEach((quote) => {
-        if (quote.topic == topic && (toggleSetting == "D" ? quote.doctrine : !quote.doctrine)) {
-            listOfQuotes.appendChild(quote.toHTML());
+        if (quote.topic == topic && (toggleSetting == "D" ? !quote.doctrine : quote.doctrine)) {
+            const quoteClone = quote.toHTML().cloneNode(true);
+            listOfQuotes.appendChild(quoteClone);
         }
     });
 }
@@ -437,6 +453,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 clearTopics();
                 topic.classList.add("selected");
                 currentTopic = topic.textContent;
+                const selectedCategoryName = findKeyWithItem(allTopics, currentTopic);
+                categoryId = categories.findIndex(category => category == selectedCategoryName);
                 displayTopic(currentTopic);
                 clearCategories();
                 const category = topic.closest('.categoryContainer').querySelector('.categoryName');

@@ -18,6 +18,8 @@ const addSpeaker = document.getElementById('addSpeaker');
 const addPosition = document.getElementById('addPosition');
 const addQuote = document.getElementById('addQuote');
 const addLink = document.getElementById('addLink');
+const clearPage = document.getElementById('clearPage');
+const addCancel = document.getElementById('addCancel');
 
 const categories = {
     "The Godhead" : [
@@ -144,7 +146,7 @@ function clearAdd() {
 async function handleSubmit(event) {
     event.preventDefault();
     // DOCTRINE TOGGLE
-    const doctrine = !doctrineToggle.checked; 
+    const doctrine = doctrineToggle.checked; 
     // checked = invitations; unchecked = doctrine
  
     // BASIC INFO 
@@ -230,8 +232,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const input = document.createElement('input');
             input.type = 'text';
             input.name = 'scriptures[]';
+            input.classList.add("scriptureInput");
             input.placeholder = 'John 3:16';
             scriptureInputs.appendChild(input);
+        });
+
+        clearPage.addEventListener('click', () => {
+            clearAdd();
         })
 
         doctrineToggle.addEventListener('change', function() {
