@@ -336,18 +336,20 @@ body {
 
 
 .logInDiv {
-    position: absolute;
+    position: fixed;
     z-index: 20;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
-    width: 40rem;
-    height: 40rem;
+    width: 30rem;
+    height: 30rem;
     box-shadow: 1px 2px 8px 0px black;
-    background-color: var(--dark-tan);
-    border-radius: 12px;
+    background-color: rgba(128, 128, 128, .5);
+    border-radius: 4rem;
+    backdrop-filter: blur(3px);
+    color: white;
 }
 .logInDiv.hidden {
     display: none;
@@ -393,21 +395,22 @@ body {
 
 .logInInput {
     font-size: 2rem;
-    background-color: var(--tan);
+    background-color: rgba(255, 252, 247, 0.8);
 }
 
 .logInSubmit {
-    font-size: clamp(1rem, 2vw, 3rem);;
-    background-color: var(--dark-tan);
-    border-radius: 5rem;
-    color: var(--green);
+    font-size: clamp(1rem, 2vw, 3rem);
     font-weight: bold;
-    border: 2px solid var(--green);
     padding: 1rem;
     transition: all 0.3s var(--ease-premium);
+    border-radius: 2rem;
+    background-color: var(--green);
+    color: var(--tan);
+    border: 2px solid var(--green);
+    box-shadow: inset 6px 6px 12px var(--green-shadow-light), inset -6px -6px 12px var(--green-shadow-dark), 0px 2px 9px 0px black;
 }
 .logInSubmit:hover {
-    background-color: var(--green);
+    background-color: rgba(76, 175, 130, .3);
     color: white;
     cursor: pointer;
 }
@@ -801,19 +804,34 @@ h3 {
     box-shadow: 0px 2px 9px 0px black;
 }
 
+.modalType {
+    display: inline-block;
+    padding: 0.35rem 1.5rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.15rem;
+    margin-bottom: 1rem;
+    box-shadow: inset 6px 6px 12px var(--green-shadow-dark), inset -6px -6px 12px var(--green-shadow-light);
+    background-color: var(--green);
+    color: white;
+}
+
 #deleteModal {
-    position: absolute;
+    position: fixed;
     z-index: 20;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
+    color: white;
     width: 20rem;
     height: 20rem;
     box-shadow: 1px 2px 8px 0px black;
-    background-color: var(--dark-tan);
+    background-color: rgba(128, 128, 128, .5);
     border-radius: 2rem;
+    backdrop-filter: blur(3px);
 }
 
 #deleteModalContent {
@@ -833,6 +851,8 @@ h3 {
     right: 2rem;
     cursor: pointer;
     font-size: 1.5rem;
+} #deleteModalClose:hover {
+    color: black;
 }
 
 #deleteModalTitle {
@@ -844,25 +864,6 @@ h3 {
     display: flex;
     gap: 1rem;
     justify-content: center;
-}
-
-#deleteModalCancel {
-    flex-grow: .75;
-    border-radius: 2rem;
-    padding: 0.6rem;
-    font-size: 1.75rem;
-    background-color: grey;
-    color: var(--tan);
-    font-weight: bold;
-    border: 1px solid grey;
-    box-shadow: inset 6px 6px 12px #a6a6a6, inset -6px -6px 12px #5a5a5a, 0px 2px 9px 0px black;
-    transition: all 0.5s var(--ease-premium);
-}
-#deleteModalCancel:hover {
-    background-color: var(--tan);
-    cursor: pointer;
-    color: black;
-    box-shadow: 0px 2px 9px 0px black;
 }
 
 #deleteModalConfirm {
@@ -878,10 +879,10 @@ h3 {
     transition: all 0.5s var(--ease-premium);
 }
 #deleteModalConfirm:hover {
-    background-color: var(--tan);
+    background-color: rgba(212, 67, 67,.3);
     cursor: pointer;
     color: black;
-    box-shadow: 0px 2px 9px 0px black;
+    /* box-shadow: 0px 2px 9px 0px black; */
 }
 
 
@@ -1055,12 +1056,6 @@ h3 {
     }
     #addScripturesContainer, #editScripturesContainer {
         align-items: center;
-    }
-
-    #deleteModal {
-        width: 90%;
-        padding-bottom: 1rem;
-        height: 50%;
     }
 
     .topicCount {  

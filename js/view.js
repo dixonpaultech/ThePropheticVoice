@@ -27,6 +27,7 @@ const filterBtn = document.getElementById('mobileFilterToggle');
 const sidebar = document.getElementById('sidebar');
 
 const quoteModal = document.getElementById("quoteModal");
+const modalType = document.getElementById("modalType");
 const modalClose = document.getElementById("modalClose");
 const modalTitle = document.getElementById("modalTitle");
 const modalDate = document.getElementById("modalDate");
@@ -97,7 +98,7 @@ class Quote {
     }
     showModal() {
         modalTitle.textContent = this.title;
-        modalDate.textContent = this.date;
+        modalDate.textContent = `${this.date[5] == "0" ? "April" : "October"} ${this.date.slice(0, 4)}`;
         modalSpeaker.textContent = this.speaker;
         modalPosition.textContent = this.position;
         modalTopic.textContent = this.topic;
@@ -120,7 +121,13 @@ class Quote {
         // link
         modalLink.href = this.link;
         modalLink.textContent = this.link;
+        modalType.textContent = this.doctrine
+            ? "INVITATION"
+            : "DOCTRINE";
 
+        modalType.className = this.doctrine
+            ? "modalType invitation"
+            : "modalType doctrine";
         // notes
         modalNotes.value = this.notes || "";
 
