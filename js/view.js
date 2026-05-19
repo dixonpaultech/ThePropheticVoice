@@ -243,8 +243,44 @@ function displayTopic(topic) {
     const category = categories[categoryId];
     quotes[category].forEach((quote) => {
         if (quote.topic == topic && (toggleSetting == "D" ? !quote.doctrine : quote.doctrine)) {
-            const quoteClone = quote.toHTML().cloneNode(true);
-            listOfQuotes.appendChild(quoteClone);
+            listOfQuotes.appendChild(quote.toHTML());
+        }
+    });
+}
+
+function updateTopicCounts() {
+    // remove old counts first
+    document.querySelectorAll(".topicCount").forEach(el => el.remove());
+
+    topics.forEach(topicElement => {
+        const topicName = topicElement.dataset.topic || topicElement.textContent.trim();
+        topicElement.dataset.topic = topicName;
+
+        let count = 0;
+
+        // search every category
+        categories.forEach(category => {
+            quotes[category].forEach(quote => {
+
+                // respect doctrine/invitation toggle
+                const matchesToggle =
+                    toggleSetting == "D"
+                        ? !quote.doctrine
+                        : quote.doctrine;
+
+                if (quote.topic === topicName && matchesToggle) {
+                    count++;
+                }
+            });
+        });
+
+        // only show if > 0
+        if (count > 0) {
+            const countSpan = document.createElement("span");
+            countSpan.className = "topicCount";
+            countSpan.textContent = ` (${count})`;
+
+            topicElement.appendChild(countSpan);
         }
     });
 }
@@ -374,6 +410,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const { data: { session } } = await supabaseClient.auth.getSession();
         await refreshQuotes();
         displayCategory();
+        updateTopicCounts();
         
         addNew.addEventListener("click", async(e) => {
             logInDestination = "add.html";
@@ -418,16 +455,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         doctrineToggle.addEventListener('change', function() {
             if (this.checked) {
-                setTimeout(() => {}, 1000);
                 toggleSetting = "I";
                 doctrineOrInvitation.textContent = "INVITATIONS";
             } else {
-                setTimeout(() => {}, 1000);
                 toggleSetting = "D";
                 doctrineOrInvitation.textContent = "DOCTRINE";
             }
-            if (currentTopic == "") {displayCategory();}
-            else {displayTopic(currentTopic);}
+
+            updateTopicCounts();
+
+            if (currentTopic == "") {
+                displayCategory();
+            } else {
+                displayTopic(currentTopic);
+            }
         });
 
         filterBtn.addEventListener('click', () => {
@@ -452,7 +493,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             topic.addEventListener('click', () => {
                 clearTopics();
                 topic.classList.add("selected");
-                currentTopic = topic.textContent;
+                currentTopic = topic.dataset.topic;
                 const selectedCategoryName = findKeyWithItem(allTopics, currentTopic);
                 categoryId = categories.findIndex(category => category == selectedCategoryName);
                 displayTopic(currentTopic);

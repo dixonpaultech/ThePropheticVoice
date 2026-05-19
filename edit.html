@@ -485,7 +485,7 @@
                     </div>
                 </div>
                 <div id="buttonContainer">
-                    <button id="editDelete" type="editSubmit">Delete</button>
+                    <button id="editDelete" type="button">Delete</button>
                     <button id="editCancel" type="button" onclick="cancelEdit()">Cancel</button>
                     <button id="editSave" type="editSubmit">Save</button>
                 </div>
@@ -494,12 +494,11 @@
     </div>
     
 
-    <div id="deleteModal" class="deleteModal hidden">
-        <div class="deleteModalContent">
+    <div id="deleteModal" class="hidden">
+        <div id="deleteModalContent">
             <div id="deleteModalClose">✕</div>
             <h2 id="deleteModalTitle">Confirm Delete?</h2>
-            <div class="modalButtons">
-                <button id="deleteModalCancel">Cancel</button>
+            <div id="deleteModalButtons">
                 <button id="deleteModalConfirm">Confirm</button>
             </div>
         </div>

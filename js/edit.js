@@ -23,9 +23,12 @@ const editQuote = document.getElementById('editQuote');
 const editLink = document.getElementById('editLink');
 const clearPage = document.getElementById('clearPage');
 const editDelete = document.getElementById('editDelete');
-const deleteModalConfirm = document.getElementById('deleteModalConfirm');
 const editMonthApril = document.getElementById('editMonthApril');
 const editMonthOctober = document.getElementById('editMonthOctober');
+const deleteModal = document.getElementById('deleteModal');
+const deleteModalClose = document.getElementById('deleteModalClose');
+const deleteModalConfirm = document.getElementById('deleteModalConfirm');
+
 
 
 class Quote {
@@ -251,6 +254,8 @@ function clearEdit() {
 
     // Reset doctrine toggle
     doctrineToggle.checked = false;
+    toggleSetting = "D";
+    doctrineOrInvitation.textContent = "DOCTRINE";
 
     // Optional:
     // collapse all details sections
@@ -275,7 +280,7 @@ async function findQuote () {
 async function handleSubmit(event) {
     event.preventDefault();
     // DOCTRINE TOGGLE
-    const doctrine = !doctrineToggle.checked; 
+    const doctrine = doctrineToggle.checked; 
     // checked = invitations; unchecked = doctrine
  
     // BASIC INFO 
@@ -310,7 +315,6 @@ async function handleSubmit(event) {
         console.error(error);
         return;
     }   
-
     for (const selectedTopic of selectedTopics) {
         const category = Object.keys(categories).find(key =>
             categories[key].includes(selectedTopic)
@@ -373,8 +377,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         editForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
             const topicId = await handleSubmit(e);
-            window.location.href = `view.html?id=${topicId}`;
+            const myCategory = Object.keys(categories).find(key => categories[key].includes(topicId));
+            const categoryId = categoryArray.findIndex(category => category == quoteToEdit.category);
+            window.location.href = `view.html?id=${categoryId}`;
         });
   
         addScriptureBtn.addEventListener('click', () => {
@@ -391,7 +398,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
 
         editDelete.addEventListener('click', () => {
-            deleteModalConfirm.classList.remove("hidden");
+            deleteModal.classList.remove("hidden");
+        });
+
+        deleteModalClose.addEventListener('click', () => {
+            deleteModal.classList.add("hidden");
         });
 
         deleteModalConfirm.addEventListener('click', async () => {
@@ -400,7 +411,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 console.error(error);
                 return;
             }   
-            deleteModalConfirm.classList.add("hidden");
+            deleteModal.classList.add("hidden");
             const categoryId = categoryArray.findIndex(category => category == quoteToEdit.category);
             window.location.href = `view.html?id=${categoryId}`;
             clearEdit();
