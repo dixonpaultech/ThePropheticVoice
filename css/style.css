@@ -352,6 +352,7 @@ body {
     border-radius: 4rem;
     color: black;
     backdrop-filter: blur(4px) url(#glass-distortion);
+    -webkit-backdrop-filter: blur(4px) url(#glass-distortion);
     transition: all .75s var(--ease-bounce);
 }
 .logInDiv:hover {
@@ -839,6 +840,7 @@ h3 {
     box-shadow: 0px 2px 12px -7px black;
     border-radius: 2rem;
     backdrop-filter: blur(4px) url(#glass-distortion);
+    -webkit-backdrop-filter: blur(4px) url(#glass-distortion);
     transition: all .5s var(--ease-bounce);
 
 }
