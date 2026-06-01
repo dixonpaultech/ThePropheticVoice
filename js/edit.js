@@ -331,7 +331,7 @@ function extractMetadata(doc) {
             
             // Conference months are April (3) or October (9)
             const month = dateObj.getMonth(); 
-            addMonth.value = (month === 3 || month === 4) ? 'April' : 'October';
+            (month === 3 || month === 4) ? editMonthApril.checked = true : editMonthOctober.checked = false;
         }
     }
 

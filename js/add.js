@@ -14,6 +14,8 @@ const addScriptureBtn = document.getElementById('addScriptureBtn');
 const scriptureInputs = document.getElementById('scriptureInputs');
 const addTitle = document.getElementById('addTitle'); 
 const addYear = document.getElementById('addYear');
+const addMonthApril = document.getElementById('addMonthApril');
+const addMonthOctober = document.getElementById('addMonthOctober');
 const addSpeaker = document.getElementById('addSpeaker');
 const addPosition = document.getElementById('addPosition');
 const addQuote = document.getElementById('addQuote');
@@ -197,7 +199,7 @@ function extractMetadata(doc) {
             
             // Conference months are April (3) or October (9)
             const month = dateObj.getMonth(); 
-            addMonth.value = (month === 3 || month === 4) ? 'April' : 'October';
+            (month === 3 || month === 4) ? addMonthApril.checked = true : addMonthOctober.checked = false;
         }
     }
 
