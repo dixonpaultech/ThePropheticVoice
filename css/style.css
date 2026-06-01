@@ -900,6 +900,24 @@ h3 {
     /* box-shadow: 0px 2px 9px 0px black; */
 }
 
+/* Dynamic status message layout placement */
+.status-wrapper {
+    min-height: 20px; /* Prevents layout shifting when text appears */
+    margin-top: 0.5rem;
+}
+
+.status-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.2s ease;
+}
+.status-text.success {
+    color: #4caf82ff;
+}
+
 
 @media (max-width: 768px) {
 

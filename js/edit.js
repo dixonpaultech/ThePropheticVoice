@@ -28,7 +28,7 @@ const editMonthOctober = document.getElementById('editMonthOctober');
 const deleteModal = document.getElementById('deleteModal');
 const deleteModalClose = document.getElementById('deleteModalClose');
 const deleteModalConfirm = document.getElementById('deleteModalConfirm');
-
+const statusMessage = document.getElementById('status-message'); 
 
 
 class Quote {
@@ -95,7 +95,7 @@ const categories = {
         "Plan of Salvation", "Premortal Life", "Agency", "The Creation", "The Fall", "Opposition", "Mortal Life", "Self-Reliance", "Death", "The Spirit World", "The Second Coming / Millennium", "Resurrection", "Judgment & Degrees of Glory"
     ], 
     "The Atonement Of Jesus Christ" : [
-        "Jesus's Earthly Ministry", "Jesus's Atonement", "The Gospel", "Salvation", "Faith in Jesus Christ", "Repentance", "Justification", "Sanctification", "Forgiveness", "Discipleship", "Spiritual Foundation", "Peacemaking", "Christlike Attributes", "Gifts of the Spirit"
+        "Jesus's Earthly Ministry", "Christ's Atonement", "The Gospel", "Salvation", "Faith in Jesus Christ", "Repentance", "Justification", "Sanctification", "Forgiveness", "Discipleship", "Spiritual Foundation", "Peacemaking", "Christlike Attributes", "Gifts of the Spirit"
     ], 
     "Dispensation, Apostasy, & Restoration" : [
         "Dispensation", "Apostasy", "Restoration", "Gathering Israel", "Christ's Church", "Church Callings", "Church Activity"
@@ -277,6 +277,83 @@ async function findQuote () {
     quoteToEdit = new Quote({id: data.id, doctrine: data.doctrine, title: data.title, date: data.date, speaker: data.speaker, position: data.position, quote: data.quote, category: data.category, topic: data.topic, link: data.link, scriptures: data.scriptures, priority: data.priority});
 }
 
+/**
+ * Custom fetch wrapper that handles extended timeouts for sleeping servers
+ */
+async function fetchWithRetry(resource, options = {}, retries = 3) {
+    // Render free tier can take ~50 seconds to spin up. We set a 60-second limit.
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 60000); 
+
+    try {
+        const response = await fetch(resource, {
+            ...options,
+            signal: controller.signal
+        });
+        clearTimeout(id);
+
+        if (!response.ok) throw new Error('Server responded with an error');
+        return await response.json();
+
+    } catch (error) {
+        clearTimeout(id);
+        // If it failed because it timed out or dropped connection, retry if we have attempts left
+        if (retries > 0) {
+            statusMessage.innerText = `⏳ Server is taking a moment to wake up... Retrying (Attempts left: ${retries})...`;
+            return await fetchWithRetry(resource, options, retries - 1);
+        }
+        throw error;
+    }
+}
+
+function extractMetadata(doc) {
+    // ---- 1. TALK TITLE ----
+    // Cleans up trailing site descriptions from the <title> tag
+    const rawTitle = doc.querySelector('title')?.innerText || '';
+    const cleanTitle = rawTitle.split('|')[0].split('-')[0].trim();
+    document.getElementById('talk-name').value = cleanTitle;
+
+    // ---- 2. SCHEMA.ORG (SPEAKER & DATE) ----
+    // Locates the JSON-LD script block you found
+    const jsonLdScript = doc.querySelector('script[type="application/ld+json"][data-react-helmet="true"]');
+    if (jsonLdScript) {
+        const schema = JSON.parse(jsonLdScript.textContent);
+        
+        // Speaker Name
+        const speakerName = schema.mainEntity?.author?.name || '';
+        addSpeaker.value = speakerName;
+
+        // Year & Month (April/October) from datePublished
+        const publishDateStr = schema.datePublished; // e.g., "2023-10-30T00:00:00.000Z"
+        if (publishDateStr) {
+            const dateObj = new Date(publishDateStr);
+            addYear.value = dateObj.getFullYear();
+            
+            // Conference months are April (3) or October (9)
+            const month = dateObj.getMonth(); 
+            addMonth.value = (month === 3 || month === 4) ? 'April' : 'October';
+        }
+    }
+
+    // ---- 3. SPEAKER POSITION ----
+    // Maps the raw text criteria into your 4 specific dropdown options
+    const roleElement = doc.querySelector('.author-role');
+    if (roleElement) {
+        const roleText = roleElement.textContent.toLowerCase();
+        let positionValue = 'General Officer'; // Default fallback
+
+        if (roleText.includes('President of The Church')) {
+            positionValue = 'President of the church';
+        } else if (roleText.includes('First Presidency')) {
+            positionValue = 'First Presidency';
+        } else if (roleText.includes('Apostle') || roleText.includes('Apostles') || roleText.includes('Twelve')) {
+            positionValue = 'Apostle';
+        }
+
+        addPosition.value = positionValue;
+    }
+}
+
 async function handleSubmit(event) {
     event.preventDefault();
     // DOCTRINE TOGGLE
@@ -374,6 +451,44 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         homeButton.addEventListener("click", async(e) => {
             window.location.href = 'index.html';
+        });
+
+        // Create or select a status element in your HTML to show loading messages
+        addLink.addEventListener('change', async (e) => {
+            const url = e.target.value;
+            if (!url.includes('churchofjesuschrist.org')) return;
+
+            // 1. Immediately show loading/waking visual state to the user
+            statusMessage.innerText = "⏳ Connecting to autofill server...";
+            statusMessage.style.color = "#d97706"; // Orange warning color
+            addLink.disabled = true; // Disable input so they don't mash keys
+
+            try {
+                // 2. Call the fetch function with an extended timeout/retry strategy
+                const htmlData = await fetchWithRetry('https://conference-proxy.onrender.com', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
+                
+                // 3. Load the HTML string into a temporary virtual DOM element
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlData.html, 'text/html');
+
+                // 4. Extract data using your existing logic
+                extractMetadata(doc);
+
+                // 5. Show success state
+                statusMessage.innerText = "✅ Form autofilled successfully!";
+                statusMessage.style.color = "#16a34a"; // Green success
+
+            } catch (err) {
+                console.error("Autofill failed: ", err);
+                statusMessage.innerText = "❌ Connection timed out. Please try again or fill fields manually.";
+                statusMessage.style.color = "#dc2626"; // Red error
+            } finally {
+                addLink.disabled = false; // Always re-enable input field
+            }
         });
 
         editForm.addEventListener("submit", async (e) => {

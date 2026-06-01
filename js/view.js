@@ -184,7 +184,7 @@ class Quote {
 const allTopics = {
     "The Godhead" : ["God the Father", "Jesus Christ", "The Holy Spirit", "Unity", "Joy", "Prayer", "Worship", "Heavenly Mother"],
     "The Plan Of Salvation" : ["Plan of Salvation", "Premortal Life", "Agency", "The Creation", "The Fall", "Opposition", "Mortal Life", "Self-Reliance", "Death", "The Spirit World", "The Second Coming / Millennium", "Resurrection", "Judgment & Degrees of Glory"],
-    "The Atonement Of Jesus Christ": ["Jesus's Earthly Ministry", "Jesus's Atonement", "The Gospel", "Salvation", "Faith in Jesus Christ", "Repentance", "Justification", "Sanctification", "Forgiveness", "Discipleship", "Spiritual Foundation", "Peacemaking", "Christlike Attributes", "Gifts of the Spirit"],
+    "The Atonement Of Jesus Christ": ["Jesus's Earthly Ministry", "Christ's Atonement", "The Gospel", "Salvation", "Faith in Jesus Christ", "Repentance", "Justification", "Sanctification", "Forgiveness", "Discipleship", "Spiritual Foundation", "Peacemaking", "Christlike Attributes", "Gifts of the Spirit"],
     "Dispensation, Apostasy, & Restoration" : ["Dispensation", "Apostasy", "Restoration", "Gathering Israel", "Christ's Church", "Church Callings", "Church Activity"],
     "Prophets & Revelation" : ["Personal Revelation", "Prophetic Authority", "Scripture Study", "Angels", "Answering Questions"],
     "Priesthood & Priestood Keys": ["The Aaronic Priesthood", "The Melchizedek Priesthood", "Church Organization"],
