@@ -411,6 +411,67 @@ async function refreshQuotes () {
     });
 }
 
+// function createElementDisplacementMap(elementId) {
+//     const element = document.getElementById(elementId);
+//     if (!element) return null;
+
+//     // 1. Get the dimensions of the target element
+//     const width = element.offsetWidth;
+//     const height = element.offsetHeight;
+
+//     // 2. Create an off-screen canvas and context
+//     const canvas = document.createElement('canvas');
+//     canvas.width = width;
+//     canvas.height = height;
+//     const ctx = canvas.getContext('2d');
+
+//     // 3. Define styling variables
+//     const padding = 16;
+//     const borderWidth = 2;
+//     const borderRadius = Math.min(width, height) / 4; // Rounded edges
+
+//     // ctx.roundRect (standard since 2022) is used to draw the shapes
+
+//     // A. Outer Red Area (Padding)
+//     ctx.fillStyle = 'red';
+//     ctx.beginPath();
+//     ctx.roundRect(0, 0, width, height, borderRadius);
+//     ctx.fill();
+
+//     // B. Green Border
+//     ctx.strokeStyle = 'green';
+//     ctx.lineWidth = borderWidth;
+//     ctx.beginPath();
+//     ctx.roundRect(
+//         padding, 
+//         padding, 
+//         width - (padding * 2), 
+//         height - (padding * 2), 
+//         borderRadius - padding > 0 ? borderRadius - padding : 0
+//     );
+//     ctx.stroke();
+
+//     // C. Inner Grey Area
+//     ctx.fillStyle = 'grey';
+//     ctx.beginPath();
+//     ctx.roundRect(
+//         padding + borderWidth, 
+//         padding + borderWidth, 
+//         width - (padding + borderWidth) * 2, 
+//         height - (padding + borderWidth) * 2, 
+//         (borderRadius - padding - borderWidth) > 0 ? borderRadius - padding - borderWidth : 0
+//     );
+//     ctx.fill();
+
+//     // 4. Return as Data URI (PNG format)
+//     return canvas.toDataURL('image/png');
+//     // Usage:
+//     // const dataUri = createElementDisplacementMap('my-element-id');
+//     // console.log(dataUri);
+// }
+
+
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {

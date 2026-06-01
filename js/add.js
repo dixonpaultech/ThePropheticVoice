@@ -225,7 +225,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         addForm.addEventListener("submit", async (e) => {
             const topicId = await handleSubmit(e);
-            window.location.href = `view.html?id=${topicId}`;
+            const myCategory = Object.keys(categories).find(key => categories[key].includes(topicId));
+            const categoryId = categoryArray.findIndex(category => category == quoteToEdit.category);
+            window.location.href = `view.html?id=${categoryId}`;
         });
   
         addScriptureBtn.addEventListener('click', () => {
