@@ -311,7 +311,7 @@ function extractMetadata(doc) {
     // Cleans up trailing site descriptions from the <title> tag
     const rawTitle = doc.querySelector('title')?.innerText || '';
     const cleanTitle = rawTitle.split('|')[0].split('-')[0].trim();
-    document.getElementById('talk-name').value = cleanTitle;
+    addTitle.value = cleanTitle;
 
     // ---- 2. SCHEMA.ORG (SPEAKER & DATE) ----
     // Locates the JSON-LD script block you found
