@@ -342,11 +342,11 @@ function extractMetadata(doc) {
         const roleText = roleElement.textContent.toLowerCase();
         let positionValue = 'General Officer'; // Default fallback
 
-        if (roleText.includes('President of The Church')) {
-            positionValue = 'President of the church';
-        } else if (roleText.includes('First Presidency')) {
+        if (roleText.includes('president of the church')) {
+            positionValue = 'President';
+        } else if (roleText.includes('first presidency')) {
             positionValue = 'First Presidency';
-        } else if (roleText.includes('Apostle') || roleText.includes('Apostles') || roleText.includes('Twelve')) {
+        } else if (roleText.includes('apostle') || roleText.includes('apostles') || roleText.includes('twelve')) {
             positionValue = 'Apostle';
         }
 
