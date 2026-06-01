@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             try {
                 // 2. Call the fetch function with an extended timeout/retry strategy
-                const htmlData = await fetchWithRetry('https://conference-proxy.onrender.com', {
+                const htmlData = await fetchWithRetry('https://conference-proxy.onrender.com/api/fetch-talk', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ url: url })
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Silent page-load ping to wake Render up immediately
 window.addEventListener('DOMContentLoaded', () => {
     // We don't care about the response, this just hits the server to start the 50-second warmup early
-    fetch('https://conference-proxy.onrender.com', { method: 'POST', body: JSON.stringify({}) })
+    fetch('https://conference-proxy.onrender.com/api/fetch-talk', { method: 'POST', body: JSON.stringify({}) })
         .then(() => console.log("Backend wakeup signal transmitted."))
         .catch(() => console.log("Backend warmup ping acknowledged."));
 });
