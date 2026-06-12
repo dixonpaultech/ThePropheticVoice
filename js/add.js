@@ -35,7 +35,7 @@ const categories = {
         "Jesus's Earthly Ministry", "Christ's Atonement", "The Gospel", "Salvation", "Faith in Jesus Christ", "Repentance", "Justification", "Sanctification", "Forgiveness", "Discipleship", "Spiritual Foundation", "Peacemaking", "Christlike Attributes", "Gifts of the Spirit"
     ], 
     "Dispensation, Apostasy, & Restoration" : [
-        "Dispensation", "Apostasy", "Restoration", "Gathering Israel", "Christ's Church", "Church Callings", "Church Activity"
+        "Dispensation", "Apostasy", "Restoration", "Gathering Israel", "Christ's Church", "Church Service"
     ], 
     "Prophets & Revelation" : [
         "Personal Revelation", "Prophetic Authority", "Scripture Study", "Angels", "Answering Questions"
