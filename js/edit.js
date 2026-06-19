@@ -21,6 +21,7 @@ const editSpeaker = document.getElementById('editSpeaker');
 const editPosition = document.getElementById('editPosition');
 const editQuote = document.getElementById('editQuote');
 const editLink = document.getElementById('editLink');
+const editScriptureBtn = document.getElementById('editScriptureBtn');
 const clearPage = document.getElementById('clearPage');
 const editDelete = document.getElementById('editDelete');
 const editMonthApril = document.getElementById('editMonthApril');
@@ -311,7 +312,7 @@ function extractMetadata(doc) {
     // Cleans up trailing site descriptions from the <title> tag
     const rawTitle = doc.querySelector('title')?.innerText || '';
     const cleanTitle = rawTitle.split('|')[0].split('-')[0].trim();
-    addTitle.value = cleanTitle;
+    editTitle.value = cleanTitle;
 
     // ---- 2. SCHEMA.ORG (SPEAKER & DATE) ----
     // Locates the JSON-LD script block you found
@@ -321,13 +322,13 @@ function extractMetadata(doc) {
         
         // Speaker Name
         const speakerName = schema.mainEntity?.author?.name || '';
-        addSpeaker.value = speakerName;
+        editSpeaker.value = speakerName;
 
         // Year & Month (April/October) from datePublished
         const publishDateStr = schema.datePublished; // e.g., "2023-10-30T00:00:00.000Z"
         if (publishDateStr) {
             const dateObj = new Date(publishDateStr);
-            addYear.value = dateObj.getFullYear();
+            editYear.value = dateObj.getFullYear();
             
             // Conference months are April (3) or October (9)
             const month = dateObj.getMonth(); 
@@ -350,7 +351,7 @@ function extractMetadata(doc) {
             positionValue = 'Apostle';
         }
 
-        addPosition.value = positionValue;
+        editPosition.value = positionValue;
     }
 }
 
@@ -454,14 +455,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         // Create or select a status element in your HTML to show loading messages
-        addLink.addEventListener('change', async (e) => {
+        editLink.addEventListener('change', async (e) => {
             const url = e.target.value;
             if (!url.includes('churchofjesuschrist.org')) return;
 
             // 1. Immediately show loading/waking visual state to the user
             statusMessage.innerText = "⏳ Connecting to autofill server...";
             statusMessage.style.color = "#d97706"; // Orange warning color
-            addLink.disabled = true; // Disable input so they don't mash keys
+            editLink.disabled = true; // Disable input so they don't mash keys
 
             try {
                 // 2. Call the fetch function with an extended timeout/retry strategy
@@ -487,7 +488,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 statusMessage.innerText = "❌ Connection timed out. Please try again or fill fields manually.";
                 statusMessage.style.color = "#dc2626"; // Red error
             } finally {
-                addLink.disabled = false; // Always re-enable input field
+                editLink.disabled = false; // Always re-enable input field
             }
         });
 
@@ -499,7 +500,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = `view.html?id=${categoryId}`;
         });
   
-        addScriptureBtn.addEventListener('click', () => {
+        editScriptureBtn.addEventListener('click', () => {
             const input = document.createElement('input');
             input.type = 'text';
             input.name = 'scriptures[]';
