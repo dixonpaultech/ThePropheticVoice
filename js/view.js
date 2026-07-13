@@ -182,26 +182,40 @@ class Quote {
 }
 
 const allTopics = {
-    "The Godhead" : ["God the Father", "Jesus Christ", "The Holy Spirit", "Unity", "Joy", "Prayer", "Worship", "Heavenly Mother"],
-    "The Plan Of Salvation" : ["Plan of Salvation", "Premortal Life", "Agency", "The Creation", "The Fall", "Opposition", "Mortal Life", "Self-Reliance", "Death", "The Spirit World", "The Second Coming / Millennium", "Resurrection", "Judgment & Degrees of Glory"],
-    "The Atonement Of Jesus Christ": ["Jesus's Earthly Ministry", "Christ's Atonement", "The Gospel", "Salvation", "Faith in Jesus Christ", "Repentance", "Justification", "Sanctification", "Forgiveness", "Discipleship", "Spiritual Foundation", "Peacemaking", "Christlike Attributes", "Gifts of the Spirit"],
-    "Dispensation, Apostasy, & Restoration" : ["Dispensation", "Apostasy", "Restoration", "Gathering Israel", "Christ's Church", "Church Service"],
-    "Prophets & Revelation" : ["Personal Revelation", "Prophetic Authority", "Scripture Study", "Angels", "Answering Questions"],
-    "Priesthood & Priestood Keys": ["The Aaronic Priesthood", "The Melchizedek Priesthood", "Church Organization"],
-    "Ordinances & Covenants" : ["Ordinances", "Baptism", "Receiving the Holy Ghost", "The Sacrament", "Endowment", "Temple Sealing", "Covenants", "Baptismal Covenants", "Temple Covenants", "The Covenant Path", "Exaltation", "Proxy Temple Work"],
-    "Relationships & Identity" : ["Divine Identity", "Marriage Relationships", "Family Relationships", "Parents", "Fatherhood", "Motherhood", "Belonging", "Friendships"],
-    "Commandments": ["2 Great Commandments", "Love God", "Love your Neighbor", "10 Commandments", "No Idolatry", "Name of the Lord", "Sabbath Day Holy", "No Murder", "No Stealing", "No Bearing False Witness", "No Coveting", "Tithing", "Fasting", "Word of Wisdom", "Law of Chastity"]
+    "The Godhead" : [
+        "God The Father", "Jesus Christ", "The Holy Spirit", "Unity", "Prayer & Worship", "Heavenly Mother"
+    ], 
+    "The Plan Of Salvation" : [
+        "Plan of Salvation", "Premortal Life", "Creation & The Fall", "Agency & Opposition", "Mortal Life", "Death & The Spirit World", "The Second Coming & Millennium", "Resurrection", "Judgment & Degrees of Glory"
+    ], 
+    "The Atonement Of Jesus Christ" : [
+        "Jesus's Earthly Ministry", "Christ's Atonement", "The Gospel", "Faith in Jesus Christ", "Repentance & Salvation", "Discipleship & Sanctification", "Christlike Attributes & Spiritual Gifts"
+    ], 
+    "The Restoration" : [
+        "Dispensation & Apostasy", "The Restoration of Christ's Church", "Gathering Israel", "Church Service"
+    ], 
+    "Revelation & Scripture" : [
+        "Prophets & Apostles", "Personal Revelation", "Scripture Study", "Angels"
+    ], 
+    "Ordinances & Covenants" : [
+        "Ordinances & Covenants", "Gospel Ordinances", "Gospel Covenants", "Proxy Temple Work", "The Covenant Path & Exaltation"
+    ], 
+    "Relationships & Identity" : [
+        "Divine Identity & Belonging", "Marriage & Family Relationships", "Fatherhood & Motherhood", "Friendships"
+    ], 
+    "Commandments" : [
+        "Love God", "Love Your Neighbor", "The 10 Commandments", "Sabbath Day Holy", "Tithing & Fasting", "Word of Wisdom", "Law of Chastity"
+    ]
 }
 
-const categories = ["The Godhead", "The Plan Of Salvation", "The Atonement Of Jesus Christ", "Dispensation, Apostasy, & Restoration", "Prophets & Revelation", "Priesthood & Priestood Keys", "Ordinances & Covenants", "Relationships & Identity", "Commandments"];
+const categories = ["The Godhead", "The Plan Of Salvation", "The Atonement Of Jesus Christ", "The Restoration", "Revelation & Scripture", "Ordinances & Covenants", "Relationships & Identity", "Commandments"];
 
 const quotes = {
     "The Godhead" : [],
     "The Plan Of Salvation" : [],
     "The Atonement Of Jesus Christ": [],
-    "Dispensation, Apostasy, & Restoration" : [],
-    "Prophets & Revelation" : [],
-    "Priesthood & Priestood Keys": [],
+    "The Restoration" : [],
+    "Revelation & Scripture" : [],
     "Ordinances & Covenants" : [],
     "Relationships & Identity" : [],
     "Commandments": []
@@ -296,7 +310,7 @@ async function refreshQuotes () {
     categories.forEach(category => {
         quotes[category] = [];
     });
-    //get godhead, salvation, atonement, restoration, revelation, priesthood, ordinances, identity, commandments
+    //get godhead, salvation, atonement, restoration, revelation, ordinances, identity, commandments
     const godheadData = await supabaseClient
     .from('quotes')
     .select('*')
@@ -324,7 +338,7 @@ async function refreshQuotes () {
     const restorationData = await supabaseClient
     .from('quotes')
     .select('*')
-    .eq('category', "Dispensation, Apostasy, & Restoration")
+    .eq('category', "The Restoration")
     .order('priority', { ascending: true })
     .order('date', { ascending: false })
     .order('title', { ascending: true });
@@ -332,15 +346,7 @@ async function refreshQuotes () {
     const revelationData = await supabaseClient
     .from('quotes')
     .select('*')
-    .eq('category', "Prophets & Revelation")
-    .order('priority', { ascending: true })
-    .order('date', { ascending: false })
-    .order('title', { ascending: true });
-    
-    const priesthoodData = await supabaseClient
-    .from('quotes')
-    .select('*')
-    .eq('category', "Priesthood & Priestood Keys")
+    .eq('category', "Revelation & Scripture")
     .order('priority', { ascending: true })
     .order('date', { ascending: false })
     .order('title', { ascending: true });
@@ -374,7 +380,6 @@ async function refreshQuotes () {
     if (atonementData.error) throw atonementData.error;
     if (restorationData.error) throw restorationData.error;
     if (revelationData.error) throw revelationData.error;
-    if (priesthoodData.error) throw priesthoodData.error;
     if (ordinancesData.error) throw ordinancesData.error;
     if (identityData.error) throw identityData.error;
     if (commandmentsData.error) throw commandmentsData.error;
@@ -395,9 +400,6 @@ async function refreshQuotes () {
     });
     revelationData.data.forEach((quote) => {
         quotes[categories[4]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
-    });
-    priesthoodData.data.forEach((quote) => {
-        quotes[categories[5]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
     });
     
     ordinancesData.data.forEach((quote) => {

@@ -26,31 +26,28 @@ const statusMessage = document.getElementById('status-message');
 
 const categories = {
     "The Godhead" : [
-        "God the Father", "Jesus Christ", "The Holy Spirit", "Unity", "Joy", "Prayer", "Worship", "Heavenly Mother"
+        "God The Father", "Jesus Christ", "The Holy Spirit", "Unity", "Prayer & Worship", "Heavenly Mother"
     ], 
     "The Plan Of Salvation" : [
-        "Plan of Salvation", "Premortal Life", "Agency", "The Creation", "The Fall", "Opposition", "Mortal Life", "Self-Reliance", "Death", "The Spirit World", "The Second Coming / Millennium", "Resurrection", "Judgment & Degrees of Glory"
+        "Plan of Salvation", "Premortal Life", "Creation & The Fall", "Agency & Opposition", "Mortal Life", "Death & The Spirit World", "The Second Coming & Millennium", "Resurrection", "Judgment & Degrees of Glory"
     ], 
     "The Atonement Of Jesus Christ" : [
-        "Jesus's Earthly Ministry", "Christ's Atonement", "The Gospel", "Salvation", "Faith in Jesus Christ", "Repentance", "Justification", "Sanctification", "Forgiveness", "Discipleship", "Spiritual Foundation", "Peacemaking", "Christlike Attributes", "Gifts of the Spirit"
+        "Jesus's Earthly Ministry", "Christ's Atonement", "The Gospel", "Faith in Jesus Christ", "Repentance & Salvation", "Discipleship & Sanctification", "Christlike Attributes & Spiritual Gifts"
     ], 
-    "Dispensation, Apostasy, & Restoration" : [
-        "Dispensation", "Apostasy", "Restoration", "Gathering Israel", "Christ's Church", "Church Service"
+    "The Restoration" : [
+        "Dispensation & Apostasy", "The Restoration of Christ's Church", "Gathering Israel", "Church Service"
     ], 
-    "Prophets & Revelation" : [
-        "Personal Revelation", "Prophetic Authority", "Scripture Study", "Angels", "Answering Questions"
-    ], 
-    "Priesthood & Priestood Keys" : [
-        "The Aaronic Priesthood", "The Melchizedek Priesthood", "Church Organization"
+    "Revelation & Scripture" : [
+        "Prophets & Apostles", "Personal Revelation", "Scripture Study", "Angels"
     ], 
     "Ordinances & Covenants" : [
-        "Ordinances", "Baptism", "Receiving the Holy Ghost", "The Sacrament", "Endowment", "Temple Sealing", "Covenants", "Baptismal Covenants", "Temple Covenants", "The Covenant Path", "Exaltation", "Proxy Temple Work"
+        "Ordinances & Covenants", "Gospel Ordinances", "Gospel Covenants", "Proxy Temple Work", "The Covenant Path & Exaltation"
     ], 
     "Relationships & Identity" : [
-        "Divine Identity", "Marriage Relationships", "Family Relationships", "Parents", "Fatherhood", "Motherhood", "Belonging", "Friendships"
+        "Divine Identity & Belonging", "Marriage & Family Relationships", "Fatherhood & Motherhood", "Friendships"
     ], 
     "Commandments" : [
-        "2 Great Commandments", "Love God", "Love your Neighbor", "10 Commandments", "No Idolatry", "Name of The Lord", "Sabbath Day Holy", "No Murder", "No Stealing", "No Bearing False Witness", "No Coveting", "Tithing", "Fasting", "Word of Wisdom", "Law of Chastity"
+        "Love God", "Love Your Neighbor", "The 10 Commandments", "Sabbath Day Holy", "Tithing & Fasting", "Word of Wisdom", "Law of Chastity"
     ]
 }
 
@@ -137,6 +134,11 @@ function clearAdd() {
 
     // Reset doctrine toggle
     doctrineToggle.checked = false;
+    toggleSetting = "D";
+    doctrineOrInvitation.textContent = "DOCTRINE";
+
+    addLink.value = "";
+    statusMessage.innerText = "";
 
     // Optional:
     // collapse all details sections
