@@ -403,7 +403,7 @@ async function refreshQuotes () {
     });
     
     ordinancesData.data.forEach((quote) => {
-        quotes[categories[55]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
+        quotes[categories[5]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
     });
     identityData.data.forEach((quote) => {
         quotes[categories[6]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
