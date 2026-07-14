@@ -946,8 +946,10 @@ h3 {
     }
 
     .category {
-        width: 18rem;
-        padding: 2rem 2rem;
+        width: 26rem;
+        height: 4rem;
+        flex-grow: 0;
+        padding: 1rem 2rem;
     }
 
     #listOfQuotes {

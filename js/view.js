@@ -259,6 +259,75 @@ function displayCategory() {
     }
 }
 
+function getCurrentConference() {
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+
+    if (month >= 10) {
+        return `${year}-10-01`;
+    }
+
+    if (month >= 4) {
+        return `${year}-04-01`;
+    }
+
+    return `${year - 1}-10-01`;
+}
+
+async function checkPriorityUpdate() {
+    const conference = getCurrentConference();
+
+    try {
+        const { data } = await supabaseClient
+            .from("app_settings")
+            .select("value")
+            .eq("key", "last_priority_update")
+            .single();
+
+        if (data.value !== conference) {
+
+            console.log("Updating priorities...");
+
+            await updateAllPriorities();
+
+            await supabaseClient
+                .from("app_settings")
+                .update({ value: conference })
+                .eq("key", "last_priority_update");
+        }
+    } catch (error) {
+        console.error("Error checking priority update:", error);
+    }
+}
+
+async function updateAllPriorities() {
+    try {
+        const { data: quotes } = await supabaseClient
+            .from("quotes")
+            .select("id, position, date");
+
+        for (const quote of quotes) {
+
+            const priority =
+                getPriority(
+                    quote.position,
+                    quote.date
+                );
+
+            await supabaseClient
+                .from("quotes")
+                .update({
+                    priority
+                })
+                .eq("id", quote.id);
+        }
+    } catch (error) {
+        console.error("Error checking priority update:", error);
+    }
+}
+
 function displayTopic(topic) {
     listOfQuotes.innerHTML = "";
     const category = categories[categoryId];
@@ -478,6 +547,7 @@ async function refreshQuotes () {
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const { data: { session } } = await supabaseClient.auth.getSession();
+        await checkPriorityUpdate();
         await refreshQuotes();
         displayCategory();
         updateTopicCounts();

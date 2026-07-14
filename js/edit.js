@@ -131,59 +131,67 @@ function getPriority (position, date) {
         mostRecentConference.setMonth(9);
         mostRecentConference.setFullYear(year - 1);
     }
-    year = mostRecentConference.getFullYear();
 
+    const fiveYearsAgo = new Date(mostRecentConference);
+    fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
+    const tenYearsAgo = new Date(mostRecentConference);
+    tenYearsAgo.setFullYear(tenYearsAgo.getFullYear() - 10);
+    const fifteenYearsAgo = new Date(mostRecentConference);
+    fifteenYearsAgo.setFullYear(fifteenYearsAgo.getFullYear() - 15);
+    const twentyYearsAgo = new Date(mostRecentConference);
+    twentyYearsAgo.setFullYear(twentyYearsAgo.getFullYear() - 20);
+
+    quoteDate = new Date(date);
     if (position == "President") {
-        if (new Date(date) == mostRecentConference) { // most recent conference
+        if (quoteDate.toDateString() === mostRecentConference.toDateString()) { // most recent conference
             return 1;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 5)) { // last 5 years
+        } else if (quoteDate.toDateString() > fiveYearsAgo.toDateString()) { // last 5 years
             return 4;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 10)) { // 5-10 years ago
+        } else if (quoteDate.toDateString() > tenYearsAgo.toDateString()) { // 5-10 years ago
             return 8;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 15)) { // 10-15 years ago
+        } else if (quoteDate.toDateString() > fifteenYearsAgo.toDateString()) { // 10-15 years ago
             return 12;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 20)) { // 15-20 years ago
+        } else if (quoteDate.toDateString() > twentyYearsAgo.toDateString()) { // 15-20 years ago
             return 16;
         } else return 19;
     } else if (position == "First Presidency") {
-        if (new Date(date) == mostRecentConference) { // most recent conference
+        if (quoteDate.toDateString() === mostRecentConference.toDateString()) { // most recent conference
             return 2;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 5)) { // last 5 years
+        } else if (quoteDate.toDateString() > fiveYearsAgo.toDateString()) { // last 5 years
             return 5;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 10)) { // 5-10 years ago
+        } else if (quoteDate.toDateString() > tenYearsAgo.toDateString()) { // 5-10 years ago
             return 9;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 15)) { // 10-15 years ago
+        } else if (quoteDate.toDateString() > fifteenYearsAgo.toDateString()) { // 10-15 years ago
             return 13;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 20)) { // 15-20 years ago
+        } else if (quoteDate.toDateString() > twentyYearsAgo.toDateString()) { // 15-20 years ago
             return 17;
         } else return 19;
     } else if (position == "Apostle") {
-        if (new Date(date) == mostRecentConference) { // most recent conference
+        if (quoteDate.toDateString() === mostRecentConference.toDateString()) { // most recent conference
             return 3;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 5)) { // last 5 years
+        } else if (quoteDate.toDateString() > fiveYearsAgo.toDateString()) { // last 5 years
             return 6;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 10)) { // 5-10 years ago
+        } else if (quoteDate.toDateString() > tenYearsAgo.toDateString()) { // 5-10 years ago
             return 10;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 15)) { // 10-15 years ago
+        } else if (quoteDate.toDateString() > fifteenYearsAgo.toDateString()) { // 10-15 years ago
             return 14;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 20)) { // 15-20 years ago
+        } else if (quoteDate.toDateString() > twentyYearsAgo.toDateString()) { // 15-20 years ago
             return 18;
         } else return 19;
     } else if (position == "General Officer") {
-        if (new Date(date) == mostRecentConference) { // most recent conference
+        if (quoteDate.toDateString() === mostRecentConference.toDateString()) { // most recent conference
             return 7;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 5)) { // last 5 years
+        } else if (quoteDate.toDateString() > fiveYearsAgo.toDateString()) { // last 5 years
             return 11;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 10)) { // 5-10 years ago
+        } else if (quoteDate.toDateString() > tenYearsAgo.toDateString()) { // 5-10 years ago
             return 15;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 15)) { // 10-15 years ago
+        } else if (quoteDate.toDateString() > fifteenYearsAgo.toDateString()) { // 10-15 years ago
             return 13;
-        } else if (new Date(date) > mostRecentConference.setFullYear(year - 20)) { // 15-20 years ago
+        } else if (quoteDate.toDateString() > twentyYearsAgo.toDateString()) { // 15-20 years ago
             return 19;
         } else return 20;
     }
     return 20;
-
 }
 
 function fillEdit () {
