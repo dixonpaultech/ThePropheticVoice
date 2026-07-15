@@ -47,7 +47,7 @@ const categories = {
         "Divine Identity & Belonging", "Marriage & Family Relationships", "Fatherhood & Motherhood", "Friendships"
     ], 
     "Commandments" : [
-        "Love God", "Love Your Neighbor", "The 10 Commandments", "Sabbath Day Holy", "Tithing & Fasting", "Word of Wisdom", "Law of Chastity"
+        "Love God", "Love Your Neighbor", "Sabbath Day Holy", "Tithing & Fasting", "Word of Wisdom", "Law of Chastity"
     ]
 }
 
