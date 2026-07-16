@@ -75,57 +75,42 @@ function getPriority (position, date) {
     const twentyYearsAgo = new Date(mostRecentConference);
     twentyYearsAgo.setFullYear(twentyYearsAgo.getFullYear() - 20);
 
-    quoteDate = new Date(date);
-    if (position == "President") {
-        if (quoteDate.toDateString() === mostRecentConference.toDateString()) { // most recent conference
-            return 1;
-        } else if (quoteDate.toDateString() > fiveYearsAgo.toDateString()) { // last 5 years
-            return 4;
-        } else if (quoteDate.toDateString() > tenYearsAgo.toDateString()) { // 5-10 years ago
-            return 8;
-        } else if (quoteDate.toDateString() > fifteenYearsAgo.toDateString()) { // 10-15 years ago
-            return 12;
-        } else if (quoteDate.toDateString() > twentyYearsAgo.toDateString()) { // 15-20 years ago
-            return 16;
-        } else return 19;
-    } else if (position == "First Presidency") {
-        if (quoteDate.toDateString() === mostRecentConference.toDateString()) { // most recent conference
-            return 2;
-        } else if (quoteDate.toDateString() > fiveYearsAgo.toDateString()) { // last 5 years
-            return 5;
-        } else if (quoteDate.toDateString() > tenYearsAgo.toDateString()) { // 5-10 years ago
-            return 9;
-        } else if (quoteDate.toDateString() > fifteenYearsAgo.toDateString()) { // 10-15 years ago
-            return 13;
-        } else if (quoteDate.toDateString() > twentyYearsAgo.toDateString()) { // 15-20 years ago
-            return 17;
-        } else return 19;
-    } else if (position == "Apostle") {
-        if (quoteDate.toDateString() === mostRecentConference.toDateString()) { // most recent conference
-            return 3;
-        } else if (quoteDate.toDateString() > fiveYearsAgo.toDateString()) { // last 5 years
-            return 6;
-        } else if (quoteDate.toDateString() > tenYearsAgo.toDateString()) { // 5-10 years ago
-            return 10;
-        } else if (quoteDate.toDateString() > fifteenYearsAgo.toDateString()) { // 10-15 years ago
-            return 14;
-        } else if (quoteDate.toDateString() > twentyYearsAgo.toDateString()) { // 15-20 years ago
-            return 18;
-        } else return 19;
-    } else if (position == "General Officer") {
-        if (quoteDate.toDateString() === mostRecentConference.toDateString()) { // most recent conference
-            return 7;
-        } else if (quoteDate.toDateString() > fiveYearsAgo.toDateString()) { // last 5 years
-            return 11;
-        } else if (quoteDate.toDateString() > tenYearsAgo.toDateString()) { // 5-10 years ago
-            return 15;
-        } else if (quoteDate.toDateString() > fifteenYearsAgo.toDateString()) { // 10-15 years ago
-            return 13;
-        } else if (quoteDate.toDateString() > twentyYearsAgo.toDateString()) { // 15-20 years ago
-            return 19;
-        } else return 20;
+    const quoteDate = new Date(date);
+    let offset = 1;
+    switch (position) {
+        case "First Presidency":
+            offset = 2;
+            break;
+        case "Apostle":
+            offset = 3;
+            break;
     }
-    return 20;
+    if (quoteDate.toDateString() === mostRecentConference.toDateString()) {
+        if (position == "General Officer") {
+            return 7;
+        }
+        return offset; // President: 1, First Presidency: 2, Apostle: 3, General Officer: 7
+    } else if (quoteDate > fiveYearsAgo) { // last 5 years
+        if (position == "General Officer") {
+            return 11;
+        }
+        return 3 + offset; // President: 4, First Presidency: 5, Apostle: 6, General Officer: 11
+    } else if (quoteDate > tenYearsAgo) { // 5-10 years ago
+        if (position == "General Officer") {
+            return 15;
+        }
+        return 7 + offset; // President: 8, First Presidency: 9, Apostle: 10, General Officer: 15
+    } else if (quoteDate > fifteenYearsAgo) { // 10-15 years ago
+        if (position == "General Officer") {
+            return 19;
+        }
+        return 11 + offset; // President: 12, First Presidency: 13, Apostle: 14, General Officer: 19
+    } else if (quoteDate > twentyYearsAgo) { // 15-20 years ago
+        if (position == "General Officer") {
+            return 20;
+        }
+        return 15 + offset; // President: 17, First Presidency: 18, Apostle: 19, General Officer: 20
+    } else return 20;
 }
 
 function clearAdd() {
