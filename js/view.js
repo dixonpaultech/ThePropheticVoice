@@ -208,12 +208,12 @@ const allTopics = {
     ]
 }
 
-const categories = ["The Godhead", "The Plan Of Salvation", "The Atonement Of Jesus Christ", "The Restoration", "Revelation & Scripture", "Ordinances & Covenants", "Relationships & Identity", "Commandments"];
+const categories = ["The Godhead", "The Plan Of Salvation", "The Gospel Of Jesus Christ", "The Restoration", "Revelation & Scripture", "Ordinances & Covenants", "Relationships & Identity", "Commandments"];
 
 const quotes = {
     "The Godhead" : [],
     "The Plan Of Salvation" : [],
-    "The Atonement Of Jesus Christ": [],
+    "The Gospel Of Jesus Christ": [],
     "The Restoration" : [],
     "Revelation & Scripture" : [],
     "Ordinances & Covenants" : [],
@@ -379,7 +379,7 @@ async function refreshQuotes () {
     categories.forEach(category => {
         quotes[category] = [];
     });
-    //get godhead, salvation, atonement, restoration, revelation, ordinances, identity, commandments
+    //get godhead, salvation, gospel, restoration, revelation, ordinances, identity, commandments
     const godheadData = await supabaseClient
     .from('quotes')
     .select('*')
@@ -396,10 +396,10 @@ async function refreshQuotes () {
     .order('date', { ascending: false })
     .order('title', { ascending: true });
     
-    const atonementData = await supabaseClient
+    const gospelData = await supabaseClient
     .from('quotes')
     .select('*')
-    .eq('category', "The Atonement Of Jesus Christ")
+    .eq('category', "The Gospel Of Jesus Christ")
     .order('priority', { ascending: true })
     .order('date', { ascending: false })
     .order('title', { ascending: true });
@@ -446,7 +446,7 @@ async function refreshQuotes () {
     
     if (godheadData.error) throw godheadData.error;
     if (salvationData.error) throw salvationData.error;
-    if (atonementData.error) throw atonementData.error;
+    if (gospelData.error) throw gospelData.error;
     if (restorationData.error) throw restorationData.error;
     if (revelationData.error) throw revelationData.error;
     if (ordinancesData.error) throw ordinancesData.error;
@@ -460,7 +460,7 @@ async function refreshQuotes () {
     salvationData.data.forEach((quote) => {
         quotes[categories[1]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
     });
-    atonementData.data.forEach((quote) => {
+    gospelData.data.forEach((quote) => {
         quotes[categories[2]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
     });
     
