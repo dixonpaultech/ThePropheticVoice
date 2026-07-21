@@ -26,25 +26,25 @@ const statusMessage = document.getElementById('status-message');
 
 const categories = {
     "The Godhead" : [
-        "God The Father", "Jesus Christ", "The Holy Spirit", "Unity", "Prayer & Worship", "Heavenly Mother"
+        "God The Father", "Jesus Christ", "The Holy Spirit", "Prayer & Worship", "Heavenly Mother"
     ], 
-    "The Plan Of Salvation" : [
-        "Plan of Salvation", "Premortal Life", "Creation & The Fall", "Agency & Opposition", "Mortal Life", "Death & The Spirit World", "The Second Coming & Millennium", "Resurrection", "Judgment & Degrees of Glory"
+    "The Plan of Salvation" : [
+        "Premortal Life", "Creation & The Fall", "Agency", "Mortal Life & Opposition", "Death & The Spirit World", "Resurrection & The Second Coming", "Judgment & Degrees of Glory"
     ], 
-    "The Atonement Of Jesus Christ" : [
-        "Jesus's Earthly Ministry", "Christ's Atonement", "The Gospel", "Faith in Jesus Christ", "Repentance & Salvation", "Discipleship & Sanctification", "Christlike Attributes & Spiritual Gifts"
+    "The Gospel of Jesus Christ" : [
+        "Jesus's Earthly Ministry & Atonement", "Faith in Jesus Christ", "Repentance & Salvation", "Discipleship", "Christlike Attributes & Spiritual Gifts"
     ], 
     "The Restoration" : [
         "Dispensation & Apostasy", "The Restoration of Christ's Church", "Gathering Israel", "Church Service"
     ], 
     "Revelation & Scripture" : [
-        "Prophets & Apostles", "Personal Revelation", "Scripture Study", "Angels"
+        "Prophets & Apostles", "Personal Revelation", "Scripture Study"
     ], 
     "Ordinances & Covenants" : [
-        "Ordinances & Covenants", "Gospel Ordinances", "Gospel Covenants", "Proxy Temple Work", "The Covenant Path & Exaltation"
+        "Gospel Ordinances", "Gospel Covenants", "Proxy Temple Work", "The Covenant Path & Exaltation"
     ], 
     "Relationships & Identity" : [
-        "Divine Identity & Belonging", "Marriage & Family Relationships", "Fatherhood & Motherhood", "Friendships"
+        "Divine Identity & Belonging", "Marriage & Family Relationships", "Fatherhood & Motherhood"
     ], 
     "Commandments" : [
         "Love God", "Love Your Neighbor", "Sabbath Day Holy", "Tithing & Fasting", "Word of Wisdom", "Law of Chastity"

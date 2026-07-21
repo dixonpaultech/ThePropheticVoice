@@ -946,8 +946,8 @@ h3 {
     }
 
     .category {
-        width: 26rem;
-        height: 4rem;
+        width: 20rem;
+        height: 4.5rem;
         flex-grow: 0;
         padding: 1rem 2rem;
     }
