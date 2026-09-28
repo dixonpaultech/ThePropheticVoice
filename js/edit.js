@@ -117,7 +117,63 @@ const categories = {
 
 const categoryArray = ["The Godhead", "The Plan of Salvation", "The Gospel of Jesus Christ", "The Restoration", "Revelation & Scripture", "Ordinances & Covenants", "Relationships & Identity", "Commandments"];
 
-function getPriority (position, date) {
+function getPriority(position, date) {
+    // 1. Define your exact multipliers (Lower score = Higher priority)
+    const roleMultipliers = {
+        "president": 1,
+        "first presidency": 3,
+        "apostle": 4,
+        "general authority": 10,
+        "general officer": 10 // Fallback/map to match your custom logic
+    };
+
+    // Normalize input position to match keys smoothly
+    const normalizedPosition = position ? position.toLowerCase().trim() : "general officer";
+    const multiplier = roleMultipliers[normalizedPosition] ?? 10;
+
+    // 2. Parse the quote date
+    const quoteDate = new Date(date);
+    if (isNaN(quoteDate.getTime())) {
+        throw new Error("Invalid date provided to getPriority.");
+    }
+    const talkYear = quoteDate.getFullYear();
+    const talkMonth = quoteDate.getMonth() + 1; // Convert 0-indexed to 1-12
+
+    // 3. Dynamically find the most recent completed General Conference anchor
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+    
+    let anchorYear = currentYear;
+    let anchorMonth = 4; // Default to April of this year
+
+    if (currentMonth >= 10) {
+        anchorMonth = 10; // October of this year has started/passed
+    } else if (currentMonth < 4) {
+        anchorMonth = 10;   // Before April means the last completed one was October of last year
+        anchorYear = currentYear - 1;
+    }
+
+    // 4. Calculate how many conferences ago the talk occurred (i)
+    // We map months to discrete half-year chunks (1 for Oct-Dec, 0 for Jan-Sep)
+    const anchorTotalHalfYears = (anchorYear * 2) + (anchorMonth === 10 ? 1 : 0);
+    const talkTotalHalfYears = (talkYear * 2) + (talkMonth >= 10 ? 1 : 0);
+    
+    // 'conferencesAgo' mirrors 'i' from your logic
+    let conferencesAgo = anchorTotalHalfYears - talkTotalHalfYears;
+    
+    // Prevent negative numbers if a quote date is ahead of the current anchor
+    if (conferencesAgo < 0) {
+        conferencesAgo = 0;
+    }
+
+    // 5. Apply the simplified Python formula: i * multiplier
+    // Adding 1 ensures the most recent conference acts as the 1st step (i = 1)
+    const i = conferencesAgo + 1;
+    return i * multiplier;
+}
+
+function oldGetPriority (position, date) {
     const mostRecentConference = new Date();
     mostRecentConference.setDate(1);
     const month = mostRecentConference.getMonth() + 1; // JS months are 0-based
@@ -329,9 +385,10 @@ function extractMetadata(doc) {
     // ---- 3. SPEAKER POSITION ----
     // Maps the raw text criteria into your 4 specific dropdown options
     const roleElement = doc.querySelector('.author-role');
+    let positionValue = 'General Officer'; // Default fallback
+    addPosition.value = positionValue;
     if (roleElement) {
         const roleText = roleElement.textContent.toLowerCase();
-        let positionValue = 'General Officer'; // Default fallback
 
         if (roleText.includes('president of the church')) {
             positionValue = 'President';
@@ -340,8 +397,7 @@ function extractMetadata(doc) {
         } else if (roleText.includes('apostle') || roleText.includes('apostles') || roleText.includes('twelve')) {
             positionValue = 'Apostle';
         }
-
-        editPosition.value = positionValue;
+        addPosition.value = positionValue;
     }
 }
 
