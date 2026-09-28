@@ -444,6 +444,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = 'index.html';
         });
 
+        const yearSelect = document.getElementById("addYear");
+        const currentYear = new Date().getFullYear();
+        const startYear = 1970; // Set this to whatever historical cutoff you want
+
+        // Loop backwards from current year down to the start year
+        for (let year = currentYear; year >= startYear; year--) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        }
+
         // Create or select a status element in your HTML to show loading messages
         editLink.addEventListener('change', async (e) => {
             const url = e.target.value;
