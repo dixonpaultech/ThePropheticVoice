@@ -92,7 +92,7 @@ const categories = {
     "The Godhead" : [
         "God The Father", "Jesus Christ", "The Holy Spirit", "Prayer & Worship", "Heavenly Mother"
     ], 
-    "The Plan Of Salvation" : [
+    "The Plan of Salvation" : [
         "Premortal Life", "Creation & The Fall", "Agency", "Mortal Life & Opposition", "Death & The Spirit World", "Resurrection & The Second Coming", "Judgment & Degrees of Glory"
     ], 
     "The Gospel of Jesus Christ" : [

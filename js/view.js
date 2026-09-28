@@ -185,7 +185,7 @@ const allTopics = {
     "The Godhead" : [
         "God The Father", "Jesus Christ", "The Holy Spirit", "Prayer & Worship", "Heavenly Mother"
     ], 
-    "The Plan Of Salvation" : [
+    "The Plan of Salvation" : [
         "Premortal Life", "Creation & The Fall", "Agency", "Mortal Life & Opposition", "Death & The Spirit World", "Resurrection & The Second Coming", "Judgment & Degrees of Glory"
     ], 
     "The Gospel of Jesus Christ" : [
@@ -208,12 +208,12 @@ const allTopics = {
     ]
 }
 
-const categories = ["The Godhead", "The Plan Of Salvation", "The Gospel Of Jesus Christ", "The Restoration", "Revelation & Scripture", "Ordinances & Covenants", "Relationships & Identity", "Commandments"];
+const categories = ["The Godhead", "The Plan of Salvation", "The Gospel of Jesus Christ", "The Restoration", "Revelation & Scripture", "Ordinances & Covenants", "Relationships & Identity", "Commandments"];
 
 const quotes = {
     "The Godhead" : [],
-    "The Plan Of Salvation" : [],
-    "The Gospel Of Jesus Christ": [],
+    "The Plan of Salvation" : [],
+    "The Gospel of Jesus Christ": [],
     "The Restoration" : [],
     "Revelation & Scripture" : [],
     "Ordinances & Covenants" : [],
@@ -391,7 +391,7 @@ async function refreshQuotes () {
     const salvationData = await supabaseClient
     .from('quotes')
     .select('*')
-    .eq('category', "The Plan Of Salvation")
+    .eq('category', "The Plan of Salvation")
     .order('priority', { ascending: true })
     .order('date', { ascending: false })
     .order('title', { ascending: true });
@@ -399,7 +399,7 @@ async function refreshQuotes () {
     const gospelData = await supabaseClient
     .from('quotes')
     .select('*')
-    .eq('category', "The Gospel Of Jesus Christ")
+    .eq('category', "The Gospel of Jesus Christ")
     .order('priority', { ascending: true })
     .order('date', { ascending: false })
     .order('title', { ascending: true });
