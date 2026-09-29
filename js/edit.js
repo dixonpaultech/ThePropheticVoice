@@ -386,7 +386,7 @@ function extractMetadata(doc) {
     // Maps the raw text criteria into your 4 specific dropdown options
     const roleElement = doc.querySelector('.author-role');
     let positionValue = 'General Officer'; // Default fallback
-    addPosition.value = positionValue;
+    editPosition.value = positionValue;
     if (roleElement) {
         const roleText = roleElement.textContent.toLowerCase();
 
@@ -397,7 +397,7 @@ function extractMetadata(doc) {
         } else if (roleText.includes('apostle') || roleText.includes('apostles') || roleText.includes('twelve')) {
             positionValue = 'Apostle';
         }
-        addPosition.value = positionValue;
+        editPosition.value = positionValue;
     }
 }
 
