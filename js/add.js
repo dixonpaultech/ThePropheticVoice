@@ -325,7 +325,6 @@ async function handleSubmit(event) {
             link: link,
             scriptures: scriptures,
             priority: priority,
-            notes: ""
         }).select().single();
         if (error) {
             console.error(error);

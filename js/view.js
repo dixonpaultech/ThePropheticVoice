@@ -37,13 +37,10 @@ const modalTopic = document.getElementById("modalTopic");
 const modalQuote = document.getElementById("modalQuote");
 const modalScriptures = document.getElementById("modalScriptures");
 const modalLink = document.getElementById("modalLink");
-const modalNotes = document.getElementById("modalNotes");
 const modalEdit = document.getElementById("modalEdit");
-const saveNotesBtn = document.getElementById("saveNotesBtn");
-const notesStatus = document.getElementById("notesStatus");
 
 class Quote {
-    constructor({ id, doctrine, title, date, speaker, position, quote, category, topic, link, scriptures, priority, notes}) {
+    constructor({ id, doctrine, title, date, speaker, position, quote, category, topic, link, scriptures, priority}) {
         this.id = id;
         this.doctrine = doctrine;
         this.title = title;
@@ -56,7 +53,6 @@ class Quote {
         this.link = link;
         this.scriptures = scriptures;
         this.priority = priority;
-        this.notes = notes;
     }
     toHTML() {
         const quoteDiv = document.createElement("div");
@@ -128,39 +124,6 @@ class Quote {
         modalType.className = this.doctrine
             ? "modalType invitation"
             : "modalType doctrine";
-        // notes
-        modalNotes.value = this.notes || "";
-
-        saveNotesBtn.onclick = async () => {
-            const { data: { session } } =
-                await supabaseClient.auth.getSession();
-
-            if (!session) {
-                logInDiv.classList.remove("hidden");
-                return;
-            }
-
-            const { error } = await supabaseClient
-                .from("quotes")
-                .update({
-                    notes: modalNotes.value.trim()
-                })
-                .eq("id", this.id);
-
-            if (error) {
-                notesStatus.textContent = "Failed to save";
-                console.error(error);
-                return;
-            }
-
-            this.notes = modalNotes.value.trim();
-
-            notesStatus.textContent = "Saved!";
-
-            setTimeout(() => {
-                notesStatus.textContent = "";
-            }, 2000);
-        };
 
         // edit button
         modalEdit.onclick = async () => {
@@ -455,30 +418,30 @@ async function refreshQuotes () {
 
     // Process fetched data
     godheadData.data.forEach((quote) => {
-        quotes[categories[0]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
+        quotes[categories[0]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority}));
     });
     salvationData.data.forEach((quote) => {
-        quotes[categories[1]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
+        quotes[categories[1]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority}));
     });
     gospelData.data.forEach((quote) => {
-        quotes[categories[2]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
+        quotes[categories[2]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority}));
     });
     
     restorationData.data.forEach((quote) => {
-        quotes[categories[3]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
+        quotes[categories[3]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority}));
     });
     revelationData.data.forEach((quote) => {
-        quotes[categories[4]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
+        quotes[categories[4]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority}));
     });
     
     ordinancesData.data.forEach((quote) => {
-        quotes[categories[5]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
+        quotes[categories[5]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority}));
     });
     identityData.data.forEach((quote) => {
-        quotes[categories[6]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
+        quotes[categories[6]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority}));
     });
     commandmentsData.data.forEach((quote) => {
-        quotes[categories[7]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority, notes: quote.notes}));
+        quotes[categories[7]].push(new Quote({id: quote.id, doctrine: quote.doctrine, title: quote.title, date: quote.date, speaker: quote.speaker, position: quote.position, quote: quote.quote, category: quote.category, topic: quote.topic, link: quote.link, scriptures: quote.scriptures, priority: quote.priority}));
     });
 }
 

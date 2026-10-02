@@ -33,7 +33,7 @@ const statusMessage = document.getElementById('status-message');
 
 
 class Quote {
-    constructor({ id, doctrine, title, date, speaker, position, quote, category, topic, link, scriptures, priority, notes}) {
+    constructor({ id, doctrine, title, date, speaker, position, quote, category, topic, link, scriptures, priority }) {
         this.id = id;
         this.doctrine = doctrine;
         this.title = title;
@@ -46,7 +46,6 @@ class Quote {
         this.link = link;
         this.scriptures = scriptures;
         this.priority = priority;
-        this.notes = notes;
     }
     toHTML() {
         const quoteDiv = document.createElement("div");
@@ -455,7 +454,6 @@ async function handleSubmit(event) {
             link: link,
             scriptures: scriptures,
             priority: priority,
-            notes: ""
         }).select().single();
         if (error) {
             console.error(error);
